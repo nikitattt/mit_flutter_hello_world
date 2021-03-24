@@ -29,9 +29,9 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
           channel: 'stable'
+    - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
     - run: flutter pub get
     - run: flutter pub global activate junitreport
-    - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
     - run: flutter test --machine | tojunit -o report.xml
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
@@ -51,9 +51,9 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
           channel: 'stable'
+    - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
     - run: flutter pub get
     - run: flutter pub global activate junitreport
-    - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
     - run: pub run test test/widget_test_fail.dart --reporter json | tojunit -o report.xml
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
