@@ -29,6 +29,7 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
           channel: 'stable'
+    - run: export PATH="$PATH":"/opt/hostedtoolcache/flutter/2.0.3-stable/x64/.pub-cache/bin"
     - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
     - run: flutter pub get
     - run: flutter pub global activate junitreport
@@ -51,6 +52,7 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
           channel: 'stable'
+    - run: export PATH="$PATH":"/opt/hostedtoolcache/flutter/2.0.3-stable/x64/.pub-cache/bin"
     - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
     - run: flutter pub get
     - run: flutter pub global activate junitreport
