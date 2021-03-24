@@ -36,7 +36,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
       with:
-        files: test-results/**/*.xml
+        files: report.xml
   
   test-job2:
     name: Test widgets with fail
@@ -57,7 +57,7 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
       with:
-        files: test-results/**/*.xml
+        files: report.xml
   
   deploy:
     name: Pretend to do deploy
