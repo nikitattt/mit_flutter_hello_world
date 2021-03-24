@@ -31,6 +31,7 @@ jobs:
           channel: 'stable'
     - run: export PATH="$PATH":"/opt/hostedtoolcache/flutter/2.0.3-stable/x64/.pub-cache/bin"
     - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - run: $PATH
     - run: flutter pub get
     - run: flutter pub global activate junitreport
     - run: flutter test --machine | tojunit -o report.xml
