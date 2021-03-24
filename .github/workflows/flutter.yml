@@ -1,4 +1,3 @@
-
 name: Futter
 
 on: [push]
@@ -31,7 +30,13 @@ jobs:
       with:
           channel: 'stable'
     - run: flutter pub get
-    - run: flutter build appbundle
+    - run: flutter pub global activate junitreport
+    - run: flutter test --machine | tojunit -o report.xml
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
+      with:
+        files: test-results/**/*.xml
   
   test-job2:
     name: Test widgets with fail
@@ -47,7 +52,7 @@ jobs:
           channel: 'stable'
     - run: flutter pub get
     - run: flutter pub global activate junitreport
-    - run: flutter build appbundle
+    - run: pub run test test/widget_test_fail.dart --reporter json | tojunit -o report.xml
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
@@ -55,7 +60,7 @@ jobs:
         files: test-results/**/*.xml
   
   deploy:
-    name: Build Flutter (Android)
+    name: Pretend to do deploy
     runs-on: ubuntu-latest
     needs: [test-job1, test-job2]
     if: always() #for job to run with test-job2 fail
@@ -68,7 +73,6 @@ jobs:
       with:
           channel: 'stable'
     - run: flutter pub get
-    - run: flutter build appbundle
     - name: Send notification to Discord
       if: success()
       env:
